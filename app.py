@@ -19,6 +19,12 @@ class Statement(db.Model):
 db.create_all()
 
 
+@app.template_filter()
+def currencyFormat(value):
+    value = float(value)
+    return "{:,.2f}".format(value)
+
+
 @app.route("/")
 def addForm():
     return render_template("addForm.html")
@@ -35,6 +41,12 @@ def addStatement():
     db.session.add(statement)
     db.session.commit()
     return redirect("/")
+
+
+@app.route("/showData")
+def showDate():
+    statements = Statement.query.all()
+    return render_template("statements.html", statements=statements)
 
 
 if __name__ == "__main__":
