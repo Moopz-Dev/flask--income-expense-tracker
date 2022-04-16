@@ -18,8 +18,12 @@
 				<td>{{item.amount | currencyFormat}}</td>
 				<td><span class="badge bg-secondary">{{item.category}}</span></td>
 				<td>{{item.date}}</td>
-				<td><a href="" class="btn btn-sm btn-warning">Edit</a></td>
-				<td><a href="" class="btn btn-sm btn-danger">Delete</a></td>
+				<td>
+					<a href="/edit/{{item.id}}" class="btn btn-sm btn-warning">Edit</a>
+				</td>
+				<td>
+					<a href="/delete/{{item.id}}" class="btn btn-sm btn-danger">Delete</a>
+				</td>
 			</tr>
 			{%endfor%}
 		</tbody>

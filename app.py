@@ -49,5 +49,35 @@ def showDate():
     return render_template("statements.html", statements=statements)
 
 
+@app.route("/delete/<int:id>")
+def deleteStatement(id):
+    statement = Statement.query.filter_by(id=id).first()
+    db.session.delete(statement)
+    db.session.commit()
+    return redirect("/")
+
+
+@app.route("/edit/<int:id>")
+def editStatement(id):
+    statement = Statement.query.filter_by(id=id).first()
+    return render_template("editForm.html", statement=statement)
+
+
+@app.route("/updateStatement", methods=["POST"])
+def updateStatement():
+    id = request.form["id"]
+    date = request.form["date"]
+    name = request.form["title"]
+    amount = request.form["amount"]
+    category = request.form["category"]
+    statement = Statement.query.filter_by(id=id).first()
+    statement.date = date
+    statement.name = name
+    statement.amount = amount
+    statement.category = category
+    db.session.commit()
+    return redirect("/")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
