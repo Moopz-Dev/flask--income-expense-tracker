@@ -25,7 +25,7 @@ def currencyFormat(value):
     return "{:,.2f}".format(value)
 
 
-@app.route("/")
+@app.route("/addForm")
 def addForm():
     return render_template("addForm.html")
 
@@ -43,7 +43,7 @@ def addStatement():
     return redirect("/")
 
 
-@app.route("/showData")
+@app.route("/")
 def showDate():
     statements = Statement.query.all()
     return render_template("statements.html", statements=statements)
